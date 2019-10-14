@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- import vue -->
+    <script src="./lib/vue-2.6.10.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>{{ msg }}</h1>
+        <h2>{{ msg2 }}</h2>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                msg: 'Hello world!',
+                msg2: 'Hello Vue!'
+            }
+        })
+    </script>
+</body>
+
+</html>

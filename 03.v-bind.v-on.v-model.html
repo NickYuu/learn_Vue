@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.6.10.js"></script>
+</head>
+<body>
+    <div id="app">
+        <p>綁定title</p>
+        <input type="button" value="button" v-bind:title="title">
+        <p>綁定title + 額外文字</p>
+        <input type="button" value="button" v-bind:title="title + '額外加的文字'">
+        <p>綁定title 綁定點擊事件</p>
+        <input type="button" value="button" v-bind:title="title" v-on:click="btnClick">
+        <p>滑鼠覆蓋後加一</p>
+        <input type="button" value="value" :title="title" v-on:mouseover="addOne">
+        <p> {{ counter }} </p>
+        <p>v-bind縮寫 : v-on縮寫 @ </p>
+        <input type="button" value="button" v-bind:title="title" @click="btnClick">
+        <p>雙向綁定 將value綁定按鈕標題 按按鈕修改value</p>
+        <input type="button" v-model="value" @click="valueChange">
+
+        <p> {{userName}} </p>
+        <input type="text" style="width: 50%;" v-model="userName">
+    </div>
+    
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                value: 'value',
+                title: '按鈕TITLE',
+                counter: 0,
+                userName: 'user name'
+            },
+            methods: {
+                btnClick() {
+                    alert('Btn Click!!!')
+                },
+
+                addOne() {
+                    this.counter += 1
+                },
+
+                valueChange() {
+                    this.value += 'a'
+                }
+
+            }
+        })    
+    </script>
+</body>
+</html>

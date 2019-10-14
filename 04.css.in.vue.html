@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./lib/vue-2.6.10.js"></script>
+    <link rel="stylesheet" href="./lib/bootstrap.css">
+</head>
+
+<body>
+    <p>綁定style</p>
+    <div id="app" :style="[divStyleobj1, divStyleobj2]">
+        <p>三元表達式綁定bootstrap btn</p>
+        <button type="button" :class="['btn', isSelected ? 'btn-primary' : 'btn-secondary']"
+            @click="selected">Primary</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: '#app',
+            data: {
+                divStyleobj2: { 'background-color': 'DarkSeaGreen', padding: '5%', width: '80%', margin: '5%' },
+                divStyleobj1: { 'border-radius': '16', 'box-shadow': '6px 6px 33px #000', },
+                isSelected: true
+            },
+            methods: {
+                selected() {
+                    this.isSelected = !this.isSelected
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>
