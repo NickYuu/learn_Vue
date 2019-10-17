@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h3>{{firstName}} {{lastName}}</h3>
+  <h3>{{fullName}}</h3>
+  <h3>總價 {{totalPrice}}</h3>
+</div>
+<script src="./lib/vue-2.6.10.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        firstName: "Nick",
+        lastName: "Yu",
+        list: [
+          {id: 1, itemName: '腳底按摩', price: 700},
+          {id: 2, itemName: '全身按摩', price: 1100},
+          {id: 3, itemName: '腳趾按摩', price: 1700},
+          {id: 4, itemName: '腳踝按摩', price: 400},
+        ]
+      }
+    },
+    computed: {
+      fullName() {
+        return this.firstName + ' ' + this.lastName
+      },
+
+      totalPrice() {
+        return this.list.map(e => e.price).reduce((prev, cur) => prev + cur)
+      }
+    }
+  })
+</script>
+</body>
+</html>

@@ -2,93 +2,99 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <script src="./lib/vue-2.6.10.js"></script>
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="./lib/vue-2.6.10.js"></script>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
 
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
 
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
 </head>
 
 <body>
 
 
-
-    <div id="app" style="padding: 5%">
-
-
-        <input type="text" style="width: 50%" v-model=searchName @change="filterName">
-        <table border="1">
-            <tr>
-                <th @click="sortWithID">id</th>
-                <th>品名</th>
-                <th>價錢</th>
-            </tr>
-            <tr v-for="prod in list">
-                　<td>{{prod.id}}</td>
-                　<td>{{prod.itemName}}</td>
-                　<td>{{prod.price}}</td>
-            </tr>
-        </table>
-
-    </div>
+<div id="app" style="padding: 5%">
 
 
-    <script>
-        var vm = new Vue({
-            el: '#app',
-            data: {
-                sortid: true,
-                searchName: '',
-                list: [
-                    { id: 1, itemName: '腳底按摩', price: 700 },
-                    { id: 2, itemName: '全身按摩', price: 1100 },
-                    { id: 3, itemName: '腳趾按摩', price: 1700 },
-                    { id: 4, itemName: '腳踝按摩', price: 400 },
-                ]
-            },
-            methods: {
-                sortWithID() {
-                    this.list = this.sortid ?
-                        this.list.sort((a, b) => { return a.id - b.id }) :
-                        this.list.reverse((a, b) => { return a.id - b.id })
+  <input type="text" style="width: 50%" v-model=searchName @input="filterName">
+  <table border="1">
+    <tr>
+      <th @click="sortWithID">id</th>
+      <th>品名</th>
+      <th>價錢</th>
+    </tr>
+    <tr v-for="prod in list">
+      　
+      <td>{{prod.id}}</td>
+      　
+      <td>{{prod.itemName}}</td>
+      　
+      <td>{{prod.price}}</td>
+    </tr>
+  </table>
 
-                    this.sortid = !this.sortid
-                },
+</div>
 
-                filterName() {
-                    this.list = this.list.filter((prod => {
-                        return prod.itemName.indexOf(this.searchName) !== -1
-                    }))
-                    if (this.searchName == '') {
-                        this.list = [
-                            { id: 1, itemName: '腳底按摩', price: 700 },
-                            { id: 2, itemName: '全身按摩', price: 1100 },
-                            { id: 3, itemName: '腳趾按摩', price: 1700 },
-                            { id: 4, itemName: '腳踝按摩', price: 400 },
-                        ]
-                    }
-                }
 
-            }
-        })
-    </script>
+<script>
+  var vm = new Vue({
+    el: '#app',
+    data: {
+      sortid: true,
+      searchName: '',
+      list: [
+        {id: 1, itemName: '腳底按摩', price: 700},
+        {id: 2, itemName: '全身按摩', price: 1100},
+        {id: 3, itemName: '腳趾按摩', price: 1700},
+        {id: 4, itemName: '腳踝按摩', price: 400},
+      ]
+    },
+    methods: {
+      sortWithID() {
+        this.list = this.sortid ?
+            this.list.sort((a, b) => {
+              return a.id - b.id
+            }) :
+            this.list.reverse((a, b) => {
+              return a.id - b.id
+            })
+
+        this.sortid = !this.sortid
+      },
+
+      filterName() {
+        this.list = this.list.filter((prod => {
+          return prod.itemName.indexOf(this.searchName) !== -1
+        }))
+        if (this.searchName == '') {
+          this.list = [
+            {id: 1, itemName: '腳底按摩', price: 700},
+            {id: 2, itemName: '全身按摩', price: 1100},
+            {id: 3, itemName: '腳趾按摩', price: 1700},
+            {id: 4, itemName: '腳踝按摩', price: 400},
+          ]
+        }
+      }
+
+    }
+  })
+</script>
 </body>
 
 </html>
