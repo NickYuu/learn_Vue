@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  {{ message }}
+  <cpn></cpn>
+  <cpn :cmessage="message" :cprod="prod"></cpn>
+</div>
+
+<template id="cpn">
+  <div>
+    <p>{{c1}}</p>
+    <p>{{cmessage}}</p>
+    <ul>
+      <li v-for="item in cprod">{{item}}</li>
+    </ul>
+  </div>
+</template>
+<script src="../lib/vue-2.6.10.js"></script>
+<script>
+
+  const cpn = {
+    template: '#cpn',
+    data() {
+      return {
+        c1: 'cnp'
+      }
+    },
+    // 1.
+    // props: ['cmessage']
+    // 2.
+    // props: {
+    //   cmessage: String,
+    //   cprod: Array
+    // }
+    // 3.
+    props: {
+      cmessage: {
+        type: String,
+        default: 'Str',
+        required: true
+      },
+      cprod: {
+        type: Array,
+        default() {
+          return ['need', 'array']
+        }
+      }
+    }
+  }
+
+  const app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        message: "Vue",
+        prod: ['腳底按摩', '全身按摩', '腳趾按摩','腳踝按摩']
+      }
+    },
+    components: {
+      cpn
+    }
+  })
+</script>
+</body>
+</html>

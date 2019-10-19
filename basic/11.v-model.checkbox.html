@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <label v-for="item in origin" :for="item">
+    <input type="checkbox" :value="item" :id="item" v-model="select"> {{item}}
+  </label>
+  <h2>Select {{select}}</h2>
+</div>
+<script src="../lib/vue-2.6.10.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        select: [],
+        origin: ['腳底按摩', '全身按摩', '腳趾按摩','腳踝按摩']
+      }
+    }
+  })
+</script>
+</body>
+</html>

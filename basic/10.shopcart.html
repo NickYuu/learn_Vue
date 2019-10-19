@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border: 1px solid #e9e9e9;
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px 16px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style>
+</head>
+<body>
+<div id="app">
+  <div v-if="list.length">
+  <table>
+    <thead>
+    <tr>
+      <th></th>
+      <th>品名</th>
+      <th>價格</th>
+      <th>節數</th>
+      <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr v-for="(item, index) in list" :key="item.id">
+      <td>{{item.id}}</td>
+      <td>{{item.itemName}}</td>
+      <td>$ {{item.price | currency}}</td>
+      <td>
+        <button @click="decrement(item)" :disabled="item.count < 1">-</button>
+        {{item.count}}
+        <button @click="increment(item)" :disabled="item.count >= 9">+</button>
+      </td>
+      <td>
+        <button @click="removeItem(index)">取消</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <h2>TOTAL: $ {{total | currency}}</h2>
+  </div>
+  <h2 v-else>不預約了</h2>
+</div>
+<script src="../lib/vue-2.6.10.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        list: [
+          {id: 1, itemName: '腳底按摩', price: 700, count: 1},
+          {id: 2, itemName: '全身按摩', price: 1100, count: 1},
+          {id: 3, itemName: '腳趾按摩', price: 1700, count: 1},
+          {id: 4, itemName: '腳踝按摩', price: 400, count: 1},
+        ],
+      }
+    },
+    computed: {
+      total() {
+        console.log(123)
+        return this.list.map(item => item.price*item.count).reduce((pre, cur) => pre + cur)
+      }
+    },
+    methods: {
+      increment(item) {
+        item.count++
+      },
+      decrement(item) {
+        item.count--
+      },
+      removeItem(index) {
+        this.list.splice(index, 1)
+      }
+    },
+    filters: {
+      currency(num) {
+        return num.toFixed(1).replace(/\d(?=(\d{3})+\.)/g, '$&,')
+      }
+    }
+  })
+</script>
+</body>
+</html>

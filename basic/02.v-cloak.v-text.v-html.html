@@ -6,23 +6,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <!-- import vue -->
-    <script src="./lib/vue-2.6.10.js"></script>
+    <script src="../lib/vue-2.6.10.js"></script>
+    <style>
+    [v-cloak] {
+        display: none
+    }
+    </style>
 </head>
 
 <body>
-
     <div id="app">
-        <h1>{{ msg }}</h1>
-        <h2>{{ msg2 }}</h2>
+        <p v-cloak>---{{msg}}---</p>
+        <p v-text="msg">---</p>
+        <p>{{msg2}}</p>
+        <p v-html="msg2"></p>
     </div>
 
     <script>
         var vm = new Vue({
             el: '#app',
             data: {
-                msg: 'Hello world!',
-                msg2: 'Hello Vue!'
+                msg: 'Hello',
+                msg2: '<h1>Hello</h1>'
             }
         })
     </script>

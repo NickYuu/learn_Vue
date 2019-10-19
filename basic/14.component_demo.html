@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app">
+  <h3>Vue</h3>
+  <p>{{p1}}</p>
+  <p>{{p2}}</p>
+  <child :pp1="p1" :pp2="p2" @f1="func1" @f2="func2"></child>
+</div>
+
+<template id="child">
+  <div>
+    <h3>Chile</h3>
+    <p>Props: {{pp1}}, {{pp2}}</p>
+    <p>Data: {{dp1}}, {{dp2}}</p>
+    <input type="text" v-model="dp1" @input="f1">
+    <input type="text" v-model="dp2" @input="f2">
+
+  </div>
+</template>
+
+<script src="../lib/vue-2.6.10.js"></script>
+<script>
+  const child = {
+    template: '#child',
+    props: {
+      pp1: String,
+      pp2: String
+    },
+    data() {
+      return {
+        dp1: this.pp1,
+        dp2: this.pp2
+      }
+    },
+    methods: {
+      f1() {
+        this.$emit('f1', this.dp1)
+      },
+      f2() {
+        this.$emit('f2', this.dp2)
+      }
+    }
+  }
+
+  const app = new Vue({
+    el: '#app',
+    data() {
+      return {
+        p1: '1',
+        p2: '2'
+      }
+    },
+    components: {
+      child
+    },
+    methods: {
+      func1(a) {
+        this.p1 = a
+      },
+      func2(a) {
+        this.p2 = a
+      }
+    }
+  })
+</script>
+</body>
+</html>
